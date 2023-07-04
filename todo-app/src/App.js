@@ -1,9 +1,10 @@
 import './App.css';
-
+import { TodoWindow } from './components/TodoWindow';
 function App() {
   return (
     <div className="App">
-      welcome user
+      <h1>Welcome User</h1>
+      <TodoWindow />
     </div>
   );
 }
