@@ -1,71 +1,78 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import '../App.css';
 
 export const TodoWindow = () => {
-    const [task, setTask] = useState({});
-    const [database, setDatabase] = useState([]);
-
-    const getData = () => {
-        axios.get(`https://6303ab6a0de3cd918b3bbabb.mockapi.io/crud-data`)
-            .then((res) =>
-                setDatabase((data) => res.data)
-            )
-    }
+    const [todotask, setTodotask] = useState("");
+    const [todadata, setTododata] = useState([]);
 
     useEffect(() => {
-        getData();
-    }, [])
+        GetNote();
+    },[])
 
-    const handleChange = (event) => {
-        const name = event.target.name
-        const value = event.target.value
-        setTask({ ...task, [name]: value })
-    }
-
-    const handleSubmit = () => {
-        axios.post(`https://6303ab6a0de3cd918b3bbabb.mockapi.io/crud-data`, task)
-            .then((res) => {
-                const d = res.data
-                console.log(d, 'res.data')
-            })
-    }
-
-    const onButtonsubmit = (e) =>{
+    const handleChange = (e) => {
         e.preventDefault();
+        const name = e.target.name;
+        const value= e.target.value;
+        setTodotask({...todotask,[name]:value})
+    }
+
+    const PostNote = () => {
+        axios.post(`https://6303ab6a0de3cd918b3bbabb.mockapi.io/crud-data`, todotask)
+            .then(res => res.data)
+        setTodotask("")
+    
+    }
+
+    const GetNote = () => {
+        axios.get(`https://6303ab6a0de3cd918b3bbabb.mockapi.io/crud-data}`)
+            .then(res =>
+                 setTododata((res.data)))
     }
 
     return (
         <>
-            <h1>Todo App</h1>
-            <form onSubmit={handleSubmit}>
-            <input type='text' name='TaAsk' value={task.TaAsk || ""} placeholder='add todo' onChange={handleChange} />
-            <button onClick={onButtonsubmit}>ADD</button>
-            </form>
-            {database && database.map((todotask) => {
-                return (
+            <div className='modall'>
+                <div className="modal-fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">Notepad</h1>
+                            </div>
+                            <div className="modal-body">
+                                <div className="col-auto">
+                                    <input type="text" name='Task' placeholder="Task: expample to do..." value={todotask.Task || ""} onChange={handleChange} id="inputPassword6" class="form-control" aria-labelledby="passwordHelpInline" />
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Clear Note</button>
+                                <button type="button" onClick={PostNote} className="btn btn-success">Save Note</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <table border='2px'>
-                        <tr>
-                            <thead>
-
-                                <th id={todotask.id}>Task Number</th>
-                                <th>Task</th>
-
-                            </thead>
-                        </tr>
-                        <tr>
-                            <tbody>
-
-                                <td>{todotask.id}</td>
-                                <td>{todotask.TaAsk}</td>
-                                <td><button>Edit</button></td>
-                                <td><button>Delete</button></td>
-
-                            </tbody>
-                        </tr>
-                    </table>
-                )
-            })}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {todadata && todadata.map((note) =>{
+                        return(
+                        <>
+                            <tr>
+                                <td>{note.id}</td>
+                                <td>{note.Task}</td>
+                            </tr>
+                        </>
+                        )
+                    })}
+                </tbody>
+            </table>
         </>
     )
 }
