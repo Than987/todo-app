@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import '../App.css';
 
-// My Todo-app
 export const TodoWindow = () => {
     const [todotask, setTodotask] = useState("");
     const [todadata, setTododata] = useState([]);
