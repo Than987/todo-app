@@ -52,7 +52,7 @@ export const TodoWindow = () => {
                     </div>
                 </div>
             </div>
-
+<hr></hr>
             <table class="table">
                 <thead>
                     <tr>
