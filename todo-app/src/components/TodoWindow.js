@@ -69,11 +69,11 @@ export const TodoWindow = () => {
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="exampleModalLabel">Notepad</h1>
+                                <h1 className="modal-title fs-5" id="exampleModalLabel"style={{color:'green',fontFamily:'cursive'}}>Notepad</h1>
                             </div>
                             <div className="modal-body">
                                 <div className="col-auto">
-                                    <input type="text" name='Task' placeholder="Task: expample to do..." value={todotask.Task || ""} onChange={handleChange} id="inputPassword6" class="form-control" aria-labelledby="passwordHelpInline" />
+                                    <input type="text" name='Task' placeholder="Task: expample to do..." value={todotask.Task || ""} onChange={handleChange} id="inputPassword6" class="form-control" autoFocus style={{fontFamily:'cursive'}}/>
                                 </div>
                             </div>
                             <div className="modal-footer">
@@ -89,7 +89,7 @@ export const TodoWindow = () => {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
+                        <th scope="col">Your Note</th>
                     </tr>
                 </thead>
                 <tbody>

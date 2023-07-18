@@ -3,7 +3,7 @@ import { TodoWindow } from './components/TodoWindow';
 function App() {
   return (
     <div className="App">
-      <h1>Welcome User</h1>
+      <h3 style={{fontFamily:'cursive',color:'Highlight'}}>Monday <span><sub>20th May</sub></span></h3>
       <TodoWindow />
     </div>
   );
